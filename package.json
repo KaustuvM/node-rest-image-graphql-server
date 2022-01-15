@@ -1,0 +1,53 @@
+{
+  "name": "node-rest-image-graphql-server-1.0.0",
+  "version": "1.0.0",
+  "description": "A node server to serve REST, IMAGE and GRAPHQL request.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --fix .",
+    "stub": "node $NODE_DEBUG_OPTION ./src/openAPI/generateStub.js | eslint --fix .",
+    "start": "node index.js",
+    "local-start": "node $NODE_DEBUG_OPTION index.js",
+    "test": "jest"
+  },
+  "author": "Kaustuv Mukherjee <kaustuvmukherjee@hotmail.com>",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": "16.13.0",
+    "npm": "8.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm run test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/controllers/*.js",
+      "src/listeners/*.js",
+      "src/middlewares/*.js",
+      "src/routers/*.js",
+      "src/services/*.js"
+    ]
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.6.1",
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
+    "winston": "^3.3.4"
+  }
+}
